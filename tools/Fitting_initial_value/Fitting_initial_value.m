@@ -47,12 +47,13 @@ end
 B(5+8*(piece_num-1), piece_num) = originroute(end,2);
 
 beta = zeros(frondend_num, 8*piece_num);
-for i=2:frondend_num-1
-    index = floor(initroutewithtime(i,3)/t);
+for i=1:frondend_num
+    index = floor(initroutewithtime(i+1,3)/t);
     beta(i, 8*index+1:8*index+8) = M_part(1,:);
 end
 
 % 定义最小二乘问题
+M_invB = M_inv * B;
 A = beta * M_inv * B;
 A11  = A(:,1:end-1);
 A12  = A(:,end);
